@@ -1,120 +1,24 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Login Page</title>
-    <style>
-      /* Base styles */
-      * {
-        box-sizing: border-box;
-      }
-      body {
-        margin: 0;
-        padding: 0;
-        font-family: Arial, sans-serif;
-        font-size: 16px;
-      }
-      h1 {
-        text-align: center;
-        margin-top: 2rem;
-      }
-      form {
-        max-width: 400px;
-        margin: 2rem auto;
-        padding: 1rem;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-      }
-      label {
-        display: block;
-        margin-top: 1rem;
-      }
-      input {
-        display: block;
-        width: 100%;
-        margin-top: 0.5rem;
-        padding: 0.5rem;
-        font-size: 16px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-      }
-      input[type="submit"] {
-        margin-top: 1rem;
-        background-color: #4CAF50;
-        color: #fff;
-        font-weight: bold;
-        border: none;
-        border-radius: 5px;
-        padding: 0.5rem;
-        cursor: pointer;
-      }
-      #feedback {
-        margin-top: 1rem;
-        text-align: center;
-      }
 
-      /* Responsive styles */
-      @media screen and (max-width: 480px) {
-        form {
-          padding: 0.5rem;
-        }
-        label, input {
-          font-size: 14px;
-        }
-        input[type="submit"] {
-          margin-top: 2rem;
-        }
-      }
-    </style>
-    <script>
-      function fillLoginForm(username, password) {
-        document.getElementById("username").value = username;
-        document.getElementById("password").value = password;
-      }
+<head>
+  <meta charset="UTF-8">
+  <title>Login Page</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js"></script>
+</head>
 
-      function validateForm() {
-        const username = document.forms["loginForm"]["username"].value;
-        const password = document.forms["loginForm"]["password"].value;
-        const feedback = document.getElementById("feedback");
-        if (username == "" || password == "") {
-          feedback.innerHTML = "Please fill in all fields";
-          feedback.style.color = "red";
-          return false;
-        } 
-        FlutterCallback.postMessage('authenticated');
-        FlutterCallback.postMessage('loginData:' + username + ',' + password);
-       
-        return true;
-      }
+<body>
+  <image src="ergosign.png" alt="Ergosign Logo" width="150"></image>
+  <form name="loginForm" id="form" onsubmit="return validateForm()">
+    <label for="username">Username:</label>
+    <input type="text" name="username" id="username">
+    <label for="password">Password:</label>
+    <input type="password" name="password" id="password">
+    <input type="submit" value="Login">
+    <div id="feedback"></div>
+  </form>
 
-      setTimeout(() => {
-        const userElement = document.getElementById("username");
-        const passwordElement = document.getElementById("password");
+</body>
 
-        userElement.addEventListener('focus', (event) => {
-          if(userElement.value == '') {
-            FlutterCallback.postMessage('focused');
-          }
-        });
-
-        passwordElement.addEventListener('focus', (event) => {
-          if(passwordElement.value == '') {
-            FlutterCallback.postMessage('focused');
-          }
-        });
-      });
-    </script>
-  </head>
-  <body>
-    <h1>Login</h1>
-    <form name="loginForm" id="form" onsubmit="return validateForm()">
-      <label for="username">Username:</label>
-      <input type="text" name="username" id="username">
-      <label for="password">Password:</label>
-      <input type="password" name="password" id="password">
-      <input type="submit" value="Login">
-      <div id="feedback"></div>
-    </form>
-
-  </body>
 </html>
